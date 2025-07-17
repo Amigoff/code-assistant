@@ -57,6 +57,8 @@
 > 4. Readability and maintainability
 > 5. Any security concerns
 > Suggest improvements and explain your reasoning for each suggestion.
+## Хорошая подборка промптов для помощи в написании кода
+https://www.learnprompt.org/chat-gpt-prompts-for-coding/
 
 ## Codex
 
