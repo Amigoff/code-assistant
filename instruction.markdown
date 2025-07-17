@@ -30,6 +30,19 @@
 > Please create a strategy for thoroughly testing this code. Include unit tests, integration tests, and any other appropriate methods. For each type of test, provide an example and explain its purpose.
 - Реализация паттерна проектирования
 > Please suggest design patterns that could improve the structure of this code. For each pattern, explain why it is a good fit and provide a brief example of its implementation.
+- Генерация кода
+> I need to implement [specific functionality] in [programming language].
+> Key requirements:
+> 1. [Requirement 1]
+> 2. [Requirement 2]
+> 3. [Requirement 3]
+> Please consider:
+> - Error handling
+> - Edge cases
+> - Performance optimization
+> - Best practices for [language/framework]
+> Please do not unnecessarily remove any comments or code.
+> Generate the code with clear comments explaining the logic.
 
 ## Codex
 
