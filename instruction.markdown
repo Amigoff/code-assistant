@@ -19,7 +19,9 @@
 
 8. При использовании агента старайтесь разбить конечную задачу на маленькие подзадачи, максимально строго опишите ограничения (время работы на конкретном железе/ограничения по памяти/безопасности и т.д.)
 
-
+## Полезные шаблоны промптов для частых задач
+- Рефакторинг с применением принципа 'чистого кода'
+> Please refactor this code to follow Clean Code principles while preserving its original functionality. Use descriptive names, break large functions into smaller ones, maintain logical order for readability, ensure each function has a single responsibility, avoid unnecessary comments, and limit variable scope.
 
 
 ## Codex
