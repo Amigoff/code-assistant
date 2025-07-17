@@ -68,7 +68,7 @@
 >  1. `【F:<file_path>†L<line_start>(-L<line_end>)?】`
 >  - File path citations must start with `F:`. `file_path` is the exact file path of the file relative to the root of the repository that contains the relevant text.
 >  - `line_start` is the 1-indexed start line number of the relevant output within that file.
->  2.`【<chunk_id>†L<line_start>(-L<line_end>)?】`
+>  2. `【<chunk_id>†L<line_start>(-L<line_end>)?】`
 >  - Where `chunk_id` is the chunk_id of the terminal output, `line_start` and `line_end` are the 1-indexed start and end line numbers of the relevant output within that chunk.
 >- Line ends are optional, and if not provided, line end is the same as line start, so only 1 line is cited.
 >- Ensure that the line numbers are correct, and that the cited file paths or terminal outputs are directly relevant to the word or clause before the citation.
