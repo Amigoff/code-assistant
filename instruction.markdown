@@ -31,16 +31,16 @@
 - Реализация паттерна проектирования
 > Please suggest design patterns that could improve the structure of this code. For each pattern, explain why it is a good fit and provide a brief example of its implementation.
 - Генерация кода
-> I need to implement [specific functionality] in [programming language].
+> I need to implement [описание функционала] in [язык].
 > Key requirements:
-> 1. [Requirement 1]
-> 2. [Requirement 2]
-> 3. [Requirement 3]
+> 1. [требование 1]
+> 2. [требование 2]
+> 3. [требование 3]
 > Please consider:
 > - Error handling
 > - Edge cases
 > - Performance optimization
-> - Best practices for [language/framework]
+> - Best practices for [язык/фреймворк]
 > Please do not unnecessarily remove any comments or code.
 > Generate the code with clear comments explaining the logic.
 
