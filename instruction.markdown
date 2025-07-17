@@ -32,11 +32,11 @@
 > Please suggest design patterns that could improve the structure of this code. For each pattern, explain why it is a good fit and provide a brief example of its implementation.
 - Генерация кода
 > I need to implement [описание функционала] in [язык].
-> Key requirements:
+> ####Key requirements:
 > 1. [требование 1]
 > 2. [требование 2]
 > 3. [требование 3]
-> Please consider:
+> ####Please consider:
 > - Error handling
 > - Edge cases
 > - Performance optimization
