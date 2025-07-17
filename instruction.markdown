@@ -45,6 +45,16 @@
 > Please do not unnecessarily remove any comments or code.
 >
 > Generate the code with clear comments explaining the logic.
+- Ревью
+> Please review the following code:
+> [ваш код]
+> Consider:
+> 1. Code quality and adherence to best practices
+> 2. Potential bugs or edge cases
+> 3. Performance optimizations
+> 4. Readability and maintainability
+> 5. Any security concerns
+> Suggest improvements and explain your reasoning for each suggestion.
 
 ## Codex
 
