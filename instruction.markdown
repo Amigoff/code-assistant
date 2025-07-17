@@ -4,12 +4,12 @@
 2. Четко ставить задачу, которую должна выполнить модель (сгенерировать код/дебаг/оптимизация кода)
 
 3. Четко описывать требования: фреймворк/диалект/другие специфические требования для вашего проекта
-❌ "Write a function to sort a list."
-✅ "Write a Python function to sort a list of integers in descending order using merge sort."
+- ❌ "Write a function to sort a list."
+- ✅ "Write a Python function to sort a list of integers in descending order using merge sort."
 
 4. Предоставляйте в промпте максимум полезного контекста об описываемой задаче
-❌ "How do I fetch API data?"
-✅ "Show me how to fetch JSON data from a REST API in JavaScript using async/await, with error handling."
+- ❌ "How do I fetch API data?"
+- ✅ "Show me how to fetch JSON data from a REST API in JavaScript using async/await, with error handling."
 
 5. Не стоит задавать модели комплексные задачи. Если задача включает несколько разделов, разделите её на пункты и задавайте модели эти подзадачи. В идеале каждый запрос должен отвечать одной функции/классу/структуре.
 
@@ -25,9 +25,9 @@
 ## Codex
 
 ### Codex хорош в:
--дополнении существующих фрагментов кода
--переводе кода с одного языка/диалекта на другой
--генерации алгоритмов/повторяющихся паттернов кода
+- дополнении существующих фрагментов кода
+- переводе кода с одного языка/диалекта на другой
+- генерации алгоритмов/повторяющихся паттернов кода
 
 Особенно обращает внимание на используемые комментарии.
 Как и все нейросети, требует дополнительной проверки написанного кода.
