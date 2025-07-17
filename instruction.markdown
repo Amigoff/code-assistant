@@ -47,7 +47,9 @@
 > Generate the code with clear comments explaining the logic.
 - Ревью
 > Please review the following code:
+> 
 > [ваш код]
+> 
 > Consider:
 > 1. Code quality and adherence to best practices
 > 2. Potential bugs or edge cases
