@@ -22,7 +22,14 @@
 ## Полезные шаблоны промптов для частых задач
 - Рефакторинг с применением принципа 'чистого кода'
 > Please refactor this code to follow Clean Code principles while preserving its original functionality. Use descriptive names, break large functions into smaller ones, maintain logical order for readability, ensure each function has a single responsibility, avoid unnecessary comments, and limit variable scope.
-
+- Применение принципов SOLID к коду (с объяснениями)
+> Analyze the code below and apply SOLID principles to improve its structure. Make only necessary changes to improve the structure and maintainability of the code without adding complexity. Explain your changes and how they relate to specific SOLID principles.
+- Оптимизация производительности кода
+> Analyze this code for performance issues. Suggest ways to improve efficiency, focusing on time complexity, space complexity, and resource usage. Provide a brief explanation for each suggestion.
+- Разработка стратегии тестирования кода
+> Please create a strategy for thoroughly testing this code. Include unit tests, integration tests, and any other appropriate methods. For each type of test, provide an example and explain its purpose.
+- Реализация паттерна проектирования
+> Please suggest design patterns that could improve the structure of this code. For each pattern, explain why it is a good fit and provide a brief example of its implementation.
 
 ## Codex
 
