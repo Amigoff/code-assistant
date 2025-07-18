@@ -57,8 +57,6 @@
 > 4. Readability and maintainability
 > 5. Any security concerns
 > Suggest improvements and explain your reasoning for each suggestion.
-## Хорошая подборка промптов для помощи в написании кода
-https://github.com/PickleBoxer/dev-chatgpt-prompts
 
 ## Codex
 
@@ -117,3 +115,67 @@ https://github.com/PickleBoxer/dev-chatgpt-prompts
 >- Prefer file citations over terminal citations unless the terminal output is directly relevant to the clauses before the citation, i.e. clauses on test results.
 >>  - For PR creation tasks, use file citations when referring to code changes in the summary section of your final response, and terminal citations in the testing section.
 >>  - For question-answering tasks, you should only use terminal citations if you need to programmatically verify an answer (i.e. counting lines of code). Otherwise, use file citations.
+
+## Cursor
+### Cursor работает в локальной среде и обеспечивает лучшую анонимность кода, относительно облачного Codex. Использовать для:
+- пошагового рефакторинга и написания кода
+- работы на локальной машине без отправки данных через API
+### Структура системного промпта Cursor:
+> You are a powerful agentic AI coding assistant.
+> ...
+> 
+> <communication>
+> 1. Be conversational but professional
+> ...
+> </communication>
+> 
+> <tool_calling>
+> You have tools at your disposal to solve the coding task
+> ...
+> </tool_calling>
+> 
+> <search_and_reading>
+> ...
+> Bias towards not asking the user for help if you can find the answer yourself.
+> </search_and_reading>
+> 
+> <making_code_changes>
+> When making code changes, NEVER output code to the USER
+> ...
+> </making_code_changes>
+> 
+> <debugging>
+> When debugging, only make code changes if you are certain that you can solve the problem
+> ...
+> </debugging>
+> 
+> <calling_external_apis>
+> 1. Unless explicitly requested by the USER, use the best suited external APIs and packages to solve the task
+> ...
+> </calling_external_apis>
+> 
+> <user_info>
+> The user's OS version is [REDACTED]. The absolute path of the user's workspace is [REDACTED]. The user's shell is [REDACTED].
+> </user_info>
+
+### Полезная статья про правила написания промптов и общую настройку Cursor:
+https://habr.com/ru/companies/selectel/articles/895344/
+
+
+## CodeGeeX 2 
+### CodeGeeX 2 - это open-sorce альтернатива, соответственно является более гибкой и настраиваемой, также работает на локальной машине, сохраняя анонимность
+### Подходит для:
+- автодополнение кода
+- генерация комментариев
+- перевод кода на другие языки
+### Системный промпт пользователь может указать сам. Инструкция по написанию промптов (в том числе системного):
+https://github.com/THUDM/CodeGeeX4/blob/main/guides/System_prompt_guideline.md
+
+## JetBrains AI Assistant 
+### JetBrains AI Assistant может интегрироваться с разными LLM, на усмотрение пользователя 
+Основные рекомендации и инструкции написания промптов к разным LLM:
+#### ChatGPT
+- https://github.com/PickleBoxer/dev-chatgpt-prompts
+#### Claude 4 Sonnet
+- https://gist.github.com/eplord/3c18db37ea7b1636f288a24f37eb0a53
+- https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/claude-4-best-practices
