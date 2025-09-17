@@ -1,181 +1,76 @@
-# Основные положения:
-1. Лучше писать все запросы на английском языке
+# Инструкция по запуску симуляции в webots.
+## Открываем 3 терминала
+1. Запуск самой симуляции webots
+```console
+ros2 launch drone_webots sim_launch.py
+```
+2. Переходим в директорию ardupilot и запускаем файл SITL_launch
+```concole
+ cd ardupilot
+./SITL_launch.sh
+```
+3. Запускаем rqt
+```console
+rqt & ros2 launch drone_launch components.launch.py
+```
+После этих шагов симуляция полностью запущена
 
-2. Четко ставить задачу, которую должна выполнить модель (сгенерировать код/дебаг/оптимизация кода)
+## Билд проекта после изменений
+Переходим в папку ros2_ws и собираем проект заново
+```console
+cd ros2_ws
+MAKEFLAGS=-j5 colcon build --parallel-workers=2
+```
+Если хотите пересобрать отдельные пакеты
+```console
+MAKEFLAGS=-j5 colcon build --packages-select object_tracker drone_move --parallel-workers=2
+```
 
-3. Четко описывать требования: фреймворк/диалект/другие специфические требования для вашего проекта
-- ❌ "Write a function to sort a list."
-- ✅ "Write a Python function to sort a list of integers in descending order using merge sort."
+## Изменение конфигурации управления 
+```console
+nano /opt/sky/config.yaml
+```
+## Запуск дрона и проведение тестового полета
+### Зайти в webots и выбрать в таблице объектов предполагаемую цель (ЛКМ)
+<img width="526" height="543" alt="image" src="https://github.com/user-attachments/assets/f4297b87-3c1a-4549-8e3b-7d2ef6960452" />
 
-4. Предоставляйте в промпте максимум полезного контекста об описываемой задаче
-- ❌ "How do I fetch API data?"
-- ✅ "Show me how to fetch JSON data from a REST API in JavaScript using async/await, with error handling."
+### С помощью появившихся координатных линий отдалить цель об Бражника на ~80-100 метров 
+<img width="457" height="331" alt="image" src="https://github.com/user-attachments/assets/54e59ec2-285f-4aaa-9e9b-d2e2c51fe42e" />
 
-5. Не стоит задавать модели комплексные задачи. Если задача включает несколько разделов, разделите её на пункты и задавайте модели эти подзадачи. В идеале каждый запрос должен отвечать одной функции/классу/структуре.
+### Переходим в окно qrt
+Нужно перезагрузить список сервисов, чтобы отображался полный их список
 
-6. При обращении просите модель писать комментарии к коду, уточняйте безопасность кода, возможные альтернативы к основному варианту, обоснование, почему был выбран именно этот вариант.
+<img width="171" height="64" alt="image" src="https://github.com/user-attachments/assets/f97c9651-8eb8-469a-880e-73a1989142aa" />
 
-7. При устранении ошибок отправлять не только саму ошибку и код, но и предполагаемый результат, который этот код должен был выдать
+По умолчанию цель будет двигаться. Чтобы изменить её траекторию или остановить, нужно выбрать сервис /webots/switch_target_trajectory и активировать несколько раз кнопкой call
 
-8. При использовании агента старайтесь разбить конечную задачу на маленькие подзадачи, максимально строго опишите ограничения (время работы на конкретном железе/ограничения по памяти/безопасности и т.д.)
+<img width="875" height="65" alt="image" src="https://github.com/user-attachments/assets/2d3fb147-55b0-4620-a444-e84c08387287" />
 
-## Полезные шаблоны промптов для общих задач
-- Рефакторинг с применением принципа 'чистого кода'
-> Please refactor this code to follow Clean Code principles while preserving its original functionality. Use descriptive names, break large functions into smaller ones, maintain logical order for readability, ensure each function has a single responsibility, avoid unnecessary comments, and limit variable scope.
-- Применение принципов SOLID к коду (с объяснениями)
-> Analyze the code below and apply SOLID principles to improve its structure. Make only necessary changes to improve the structure and maintainability of the code without adding complexity. Explain your changes and how they relate to specific SOLID principles.
-- Оптимизация производительности кода
-> Analyze this code for performance issues. Suggest ways to improve efficiency, focusing on time complexity, space complexity, and resource usage. Provide a brief explanation for each suggestion.
-- Разработка стратегии тестирования кода
-> Please create a strategy for thoroughly testing this code. Include unit tests, integration tests, and any other appropriate methods. For each type of test, provide an example and explain its purpose.
-- Реализация паттерна проектирования
-> Please suggest design patterns that could improve the structure of this code. For each pattern, explain why it is a good fit and provide a brief example of its implementation.
-- Генерация кода
-> I need to implement [описание функционала] in [язык].
-> #### Key requirements:
-> 1. [требование 1]
-> 2. [требование 2]
-> 3. [требование 3]
-> #### Please consider:
-> - Error handling
-> - Edge cases
-> - Performance optimization
-> - Best practices for [язык/фреймворк]
-> 
-> Please do not unnecessarily remove any comments or code.
->
-> Generate the code with clear comments explaining the logic.
-- Ревью
-> Please review the following code:
-> 
-> [ваш код]
-> 
-> Consider:
-> 1. Code quality and adherence to best practices
-> 2. Potential bugs or edge cases
-> 3. Performance optimizations
-> 4. Readability and maintainability
-> 5. Any security concerns
-> Suggest improvements and explain your reasoning for each suggestion.
+Для восстановления изначального положения цели используется сервис /webots/reset_target
 
-## Codex
+Чтобы активировать выбор цели вручную, нужно в левом окне сервисов выбрать /drone/object_tracker/overlayed
 
-### Codex хорош в:
-- дополнении существующих фрагментов кода
-- переводе кода с одного языка/диалекта на другой
-- генерации алгоритмов/повторяющихся паттернов кода
+Далее под ним в окне команды указать
+```console
+/drone/object_tracker/click
+```
+и нажать enter
 
-Особенно обращает внимание на используемые комментарии.
+<img width="805" height="139" alt="image" src="https://github.com/user-attachments/assets/16f7546c-707b-495a-81a0-692e89931134" />
 
-Как и все нейросети, требует дополнительной проверки написанного кода.
-### Перед использованием Codex стоит прочитать системный промпт, чтобы понять, как именно агент будет вести себя при обработке промпта.
-### Так выглядит системный промпт Codex:
+далее можно нажатием ЛКМ выбирать цель для Бражника
 
-### Instructions
->- The user will provide a task.
->- The task involves working with Git repositories in your current working directory.
->- Wait for all terminal commands to be completed (or terminate them) before finishing.
+### Открываем Qgroundcontrol 
+Переходим в главное окно и, есали горит надпись disconnected, нажимаем на неё и выбираем SITL
 
-### Git instructions
->If completing the user's task requires writing or modifying files:
->- Do not create new branches.
->- Use git to commit your changes.
->- If pre-commit fails, fix issues and retry.
->- Check git status to confirm your commit. You must leave your worktree in a clean state.
->- Only committed code will be evaluated.
->- Do not modify or amend existing commits.
+<img width="1211" height="605" alt="image" src="https://github.com/user-attachments/assets/dd9a48bf-064e-467d-9854-db90623951c9" />
 
-### AGENTS.md spec
->- Containers often contain AGENTS.md files. These files can appear anywhere in the container's filesystem. Typical locations include `/`, `~`, and in various places inside of Git repos.
->- These files are a way for humans to give you (the agent) instructions or tips for working within the container.
->- Some examples might be: coding conventions, info about how code is organized, or instructions for how to run or test code.
->- AGENTS.md files may provide instructions about PR messages (messages attached to a GitHub Pull Request produced by the agent, describing the PR). These instructions should be respected.
->- Instructions in AGENTS.md files:
->>  - The scope of an AGENTS.md file is the entire directory tree rooted at the folder that contains it.
->>  - For every file you touch in the final patch, you must obey instructions in any AGENTS.md file whose scope includes that file.
->>  - Instructions about code style, structure, naming, etc. apply only to code within the AGENTS.md file's scope, unless the file states otherwise.
->>  - More-deeply-nested AGENTS.md files take precedence in the case of conflicting instructions.
->>  - Direct system/developer/user instructions (as part of a prompt) take precedence over AGENTS.md instructions.
->- AGENTS.md files need not live only in Git repos. For example, you may find one in your home directory.
->- If the AGENTS.md includes programmatic checks to verify your work, you MUST run all of them and make a best effort to validate that the checks pass AFTER all code changes have been made.
->>  - This applies even for changes that appear simple, i.e. documentation. You still must run all of the programmatic checks.
+Чтобы взлететь нажимаем кнопку takeoff и проводим слайдером вправо
 
-### Citations instructions
->- If you browsed files or used terminal commands, you must add citations to the final response (not the body of the PR message) where relevant. Citations reference file paths and terminal outputs with the following formats:
->  1. `【F:<file_path>†L<line_start>(-L<line_end>)?】`
->  - File path citations must start with `F:`. `file_path` is the exact file path of the file relative to the root of the repository that contains the relevant text.
->  - `line_start` is the 1-indexed start line number of the relevant output within that file.
->  2. `【<chunk_id>†L<line_start>(-L<line_end>)?】`
->  - Where `chunk_id` is the chunk_id of the terminal output, `line_start` and `line_end` are the 1-indexed start and end line numbers of the relevant output within that chunk.
->- Line ends are optional, and if not provided, line end is the same as line start, so only 1 line is cited.
->- Ensure that the line numbers are correct, and that the cited file paths or terminal outputs are directly relevant to the word or clause before the citation.
->- Do not cite completely empty lines inside the chunk, only cite lines that have content.
->- Only cite from file paths and terminal outputs, DO NOT cite from previous pr diffs and comments, nor cite git hashes as chunk ids.
->- Use file path citations that reference any code changes, documentation or files, and use terminal citations only for relevant terminal output.
->- Prefer file citations over terminal citations unless the terminal output is directly relevant to the clauses before the citation, i.e. clauses on test results.
->>  - For PR creation tasks, use file citations when referring to code changes in the summary section of your final response, and terminal citations in the testing section.
->>  - For question-answering tasks, you should only use terminal citations if you need to programmatically verify an answer (i.e. counting lines of code). Otherwise, use file citations.
+### Возвращаемся в окно rqt
+После того как Бражник взлетел и цель выбрана, чтобы начать преследование цели нужно выбрать сервис /drone/move/start_interception и нажать call
 
-## Cursor
-### Cursor работает в локальной среде и обеспечивает лучшую анонимность кода, относительно облачного Codex. Использовать для:
-- пошагового рефакторинга и написания кода
-- работы на локальной машине без отправки данных через API
-### Структура системного промпта Cursor:
-> You are a powerful agentic AI coding assistant.
-> ...
-> 
-> <communication>
-> 1. Be conversational but professional
-> ...
-> </communication>
-> 
-> <tool_calling>
-> You have tools at your disposal to solve the coding task
-> ...
-> </tool_calling>
-> 
-> <search_and_reading>
-> ...
-> Bias towards not asking the user for help if you can find the answer yourself.
-> </search_and_reading>
-> 
-> <making_code_changes>
-> When making code changes, NEVER output code to the USER
-> ...
-> </making_code_changes>
-> 
-> <debugging>
-> When debugging, only make code changes if you are certain that you can solve the problem
-> ...
-> </debugging>
-> 
-> <calling_external_apis>
-> 1. Unless explicitly requested by the USER, use the best suited external APIs and packages to solve the task
-> ...
-> </calling_external_apis>
-> 
-> <user_info>
-> The user's OS version is [REDACTED]. The absolute path of the user's workspace is [REDACTED]. The user's shell is [REDACTED].
-> </user_info>
+<img width="883" height="74" alt="image" src="https://github.com/user-attachments/assets/7c3cbc78-012a-4656-b527-ab28c22eabc2" />
 
-### Полезная статья про правила написания промптов и общую настройку Cursor:
-https://habr.com/ru/companies/selectel/articles/895344/
+После этого начнет работать скрипт наведения и дрон полетит за целью. Текущие векторы ошибки полета выводятся в 3й терминал, где запущен rqt
 
-
-## CodeGeeX 2 
-### CodeGeeX 2 - это open-sorce альтернатива, соответственно является более гибкой и настраиваемой, также работает на локальной машине, сохраняя анонимность
-### Подходит для:
-- автодополнение кода
-- генерация комментариев
-- перевод кода на другие языки
-### Системный промпт пользователь может указать сам. Инструкция по написанию промптов (в том числе системного):
-https://github.com/THUDM/CodeGeeX4/blob/main/guides/System_prompt_guideline.md
-
-## JetBrains AI Assistant 
-### JetBrains AI Assistant может интегрироваться с разными LLM, на усмотрение пользователя 
-Основные рекомендации и инструкции написания промптов к разным LLM:
-#### ChatGPT
-- https://github.com/PickleBoxer/dev-chatgpt-prompts
-#### Claude 4 Sonnet
-- https://gist.github.com/eplord/3c18db37ea7b1636f288a24f37eb0a53
-- https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/claude-4-best-practices
